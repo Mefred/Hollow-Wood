@@ -1,0 +1,99 @@
+// Copyright 2026 imfred
+// SPDX-License-Identifier: GPL-2.0-or-later
+
+#include QMK_KEYBOARD_H
+
+enum layers {
+    _BASE,
+    _NUM,
+    _SYM,
+    _NAV
+};
+
+enum {
+    TD_BSP
+};
+
+tap_dance_action_t tap_dance_actions[] = {
+    [TD_BSP] = ACTION_TAP_DANCE_DOUBLE(KC_BSPC, LCTL(KC_BSPC))
+};
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+    /*
+     *                          BASE
+     * ┌───┬───┬───┬───┬───┐              ┌───┬───┬───┬───┬───┐
+     * │ Q │ W │ F │ P │ G │              │ J │ L │ U │ Y │ ; │
+     * ├───┼───┼───┼───┤───┤              ├───┼───┼───┼───┤───┤
+     * │ A │ R │ S │ T │ D │              │ H │ N │ E │ I │ O │
+     * ├───┼───┼───┼───┤───┤              ├───┼───┼───┼───┤───┤
+     * │ Z │ X │ C │ V │ B │              │ K │ M │ , │ . │ / │
+     * └───┴───┼───┼───┤───┤              ├───┼───┼───┼───┴───┘
+     *         │ESC│SPC│TAB│              │ENT│DEL│SFT│
+     *         └───┴───┴───┘              └───┴───┴───┘
+     *             _NUM _NAV              _SYM
+     *                           NUM
+     * ┌───┬───┬───┬───┬───┐              ┌───┬───┬───┬───┬───┐
+     * │ 1 │ 2 │ 3 │ 4 │ 5 │              │ 6 │ 7 │ 8 │ 9 │ 0 │
+     * ├───┼───┼───┼───┤───┤              ├───┼───┼───┼───┤───┤
+     * │ ! │ @ │ # │ $ │ % │              │ ^ │ & │ * │ ( │ ) │
+     * ├───┼───┼───┼───┤───┤              ├───┼───┼───┼───┤───┤
+     * │   │   │   │   │   │              │   │   │   │   │   │
+     * └───┴───┼───┼───┤───┤              ├───┼───┼───┼───┴───┘
+     *         │   │   │   │              │HOM│   │END│
+     *         └───┴───┴───┘              └───┴───┴───┘
+     *                  _NUM              _SYM
+     *                          SYMBOL
+     * ┌───┬───┬───┬───┬───┐              ┌───┬───┬───┬───┬───┐
+     * │ ( │ [ │ { │ < │ = │              │ > │ } │ ] │ ) │   │
+     * ├───┼───┼───┼───┤───┤              ├───┼───┼───┼───┤───┤
+     * │ + │ - │ * │ / │ % │              │ ! │ ? │ : │ ; │   │
+     * ├───┼───┼───┼───┤───┤              ├───┼───┼───┼───┤───┤
+     * │ \ │ | │ & │ ~ │ ^ │              │ _ │ " │ ' │ ` │   │
+     * └───┴───┼───┼───┤───┤              ├───┼───┼───┼───┴───┘
+     *         │   │   │   │              │   │   │   │
+     *         └───┴───┴───┘              └───┴───┴───┘
+     *                  _NUM              _SYM
+     *
+     *
+     *                           NAV
+     * ┌───┬───┬───┬───┬───┐              ┌───┬───┬───┬───┬───┐
+     * │   │   │   │   │   │              │   │   │   │   │   │
+     * ├───┼───┼───┼───┤───┤              ├───┼───┼───┼───┤───┤
+     * │   │   │   │   │   │              │   │LFT│DWN│UP │RHT│
+     * ├───┼───┼───┼───┤───┤              ├───┼───┼───┼───┤───┤
+     * │   │   │   │   │   │              │   │   │   │   │   │
+     * └───┴───┼───┼───┤───┤              ├───┼───┼───┼───┴───┘
+     *         │   │   │   │              │HOM│   │END│
+     *         └───┴───┴───┘              └───┴───┴───┘
+     *                  _NUM              _SYM
+     *
+     */
+
+    [_BASE] = LAYOUT(
+        KC_Q,   KC_W,   KC_F,   KC_P,       KC_G,                               KC_J,   KC_L,   KC_U,       KC_Y,       KC_SEMICOLON,
+        KC_A,   KC_R,   KC_S,   KC_T,       KC_D,                               KC_H,   KC_N,   KC_E,       KC_I,       KC_O,
+        KC_Z,   KC_X,   KC_C,   KC_V,       KC_B,                               KC_K,   KC_M,   KC_COMM,    KC_DOT,     KC_SLASH,
+        KC_NO,  KC_NO,  KC_ESC, LT(_NUM, KC_SPC),LT(_NAV, KC_TAB),              LT(_SYM, KC_ENTER), TD(TD_BSP),  KC_LSFT,    KC_NO,    KC_NO
+    ),
+
+    [_NUM] = LAYOUT(
+        KC_1,   KC_2,   KC_3,   KC_4,   KC_5,                               KC_6,   KC_7,   KC_8,   KC_9,   KC_0,
+        LSFT(KC_1),LSFT(KC_2),LSFT(KC_3),LSFT(KC_4),LSFT(KC_5),             LSFT(KC_6),LSFT(KC_7),LSFT(KC_8),LSFT(KC_9),LSFT(KC_0),
+        KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                              KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
+        KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                              KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO
+    ),
+
+    [_SYM] = LAYOUT(
+        LSFT(KC_9),KC_LEFT_BRACKET,LSFT(KC_LEFT_BRACKET),LSFT(KC_COMMA),KC_EQUAL,                    LSFT(KC_DOT),  LSFT(KC_RIGHT_BRACKET),  KC_RIGHT_BRACKET,  LSFT(KC_9),  KC_NO,
+        LSFT(KC_EQUAL),  KC_MINUS,  LSFT(KC_8),  KC_SLASH,  LSFT(KC_5),                              LSFT(KC_1),  LSFT(KC_SLASH),  LSFT(KC_SEMICOLON),  KC_SEMICOLON,  KC_NO,
+        KC_BACKSLASH,LSFT(KC_BACKSLASH),LSFT(KC_7),LSFT(KC_GRAVE),LSFT(KC_6),                        LSFT(KC_MINUS),  LSFT(KC_QUOTE),  KC_QUOTE,  KC_GRAVE,  KC_NO,
+        KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                                                       KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO
+    ),
+
+    [_NAV] = LAYOUT(
+        KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                              KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
+        KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                              KC_NO,  KC_LEFT,  KC_DOWN,  KC_UP,  KC_RGHT,
+        KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                              KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
+        KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                              KC_HOME,  KC_NO,  KC_END,  KC_NO,  KC_NO
+    )
+};
