@@ -2,6 +2,10 @@
 
 A 36-key unified ergonomic keyboard designed from scratch in KiCad.
 
+
+![Hollow Wood](photo.jpg)
+
+
 ## Overview
 
 Hollow Wood is a 36-key column-staggered ergonomic keyboard built as a single unified PCB.
@@ -56,7 +60,7 @@ Hollow Wood is a 36-key column-staggered ergonomic keyboard built as a single un
 
 - `/pcb` — KiCad PCB and schematic files
 - `/firmware` — QMK Firmware Files
-- `/gerbers` — Production-ready gerber files
+- `/gerber` — Production-ready gerber files
 
 ### PCB
 
