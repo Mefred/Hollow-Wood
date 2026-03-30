@@ -102,4 +102,4 @@ Order gerbers from JLCPCB with the following settings:
 
 ## Author
 
-imfred
+mefred
